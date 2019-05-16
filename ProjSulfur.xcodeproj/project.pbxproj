@@ -7,21 +7,106 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA20FE6A228451BB009D01DB /* HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AA20FE69228451BB009D01DB /* HUD.m */; };
+		AA20FE6D22845EA6009D01DB /* LFNameGen.m in Sources */ = {isa = PBXBuildFile; fileRef = AA20FE6C22845EA6009D01DB /* LFNameGen.m */; };
+		AA20FE6F22845FA0009D01DB /* ork.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA20FE6E22845FA0009D01DB /* ork.plist */; };
 		AA5A8D32228319610083AA76 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5A8D31228319610083AA76 /* AppDelegate.m */; };
 		AA5A8D34228319620083AA76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA5A8D33228319620083AA76 /* Assets.xcassets */; };
-		AA5A8D37228319620083AA76 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA5A8D35228319620083AA76 /* MainMenu.xib */; };
 		AA5A8D3A228319620083AA76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5A8D39228319620083AA76 /* main.m */; };
+		AA5A8D67228323780083AA76 /* terminal.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5A8D66228323780083AA76 /* terminal.png */; };
+		AA5A8D9C228336190083AA76 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AA5A8D9B228336190083AA76 /* README.md */; };
+		AA5A8DA2228358630083AA76 /* LifeForm.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5A8DA1228358630083AA76 /* LifeForm.m */; };
+		AA5A8DA5228359F50083AA76 /* Engine.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5A8DA4228359F50083AA76 /* Engine.m */; };
+		AA5A8DA822835E060083AA76 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5A8DA722835E060083AA76 /* Map.m */; };
+		AA5B665122860DDD0091119A /* Critter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5B665022860DDD0091119A /* Critter.m */; };
+		AA5B66542286181E0091119A /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5B66532286181E0091119A /* Item.m */; };
+		AA7C6A14228CCF4000007D7E /* libtcod.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5A8D422283199D0083AA76 /* libtcod.dylib */; };
+		AA7C6A15228CCF4200007D7E /* libtcodgui.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5A8D432283199D0083AA76 /* libtcodgui.dylib */; };
+		AA7C6A16228CCF4400007D7E /* libtcodxx.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5A8D442283199D0083AA76 /* libtcodxx.dylib */; };
+		AA7C6A24228CE7C500007D7E /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AA7C6A21228CE6B800007D7E /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AA7F303A228C56C2000FDF66 /* cp437_10x10.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7F3039228C56C2000FDF66 /* cp437_10x10.png */; };
+		AAB9B6B42286B9AE00FBEA98 /* ItemData.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAB9B6B32286B9AE00FBEA98 /* ItemData.plist */; };
+		AAB9B6BD228AFAA900FBEA98 /* ItemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB9B6BC228AFAA900FBEA98 /* ItemManager.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		AA7C6A25228CE7C500007D7E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AA7C6A24228CE7C500007D7E /* SDL2.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		AA20FE68228451BB009D01DB /* HUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HUD.h; sourceTree = "<group>"; };
+		AA20FE69228451BB009D01DB /* HUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HUD.m; sourceTree = "<group>"; };
+		AA20FE6B22845EA6009D01DB /* LFNameGen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFNameGen.h; sourceTree = "<group>"; };
+		AA20FE6C22845EA6009D01DB /* LFNameGen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFNameGen.m; sourceTree = "<group>"; };
+		AA20FE6E22845FA0009D01DB /* ork.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ork.plist; sourceTree = "<group>"; };
 		AA5A8D2D228319610083AA76 /* ProjSulfur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjSulfur.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA5A8D30228319610083AA76 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AA5A8D31228319610083AA76 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AA5A8D33228319620083AA76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AA5A8D36228319620083AA76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		AA5A8D38228319620083AA76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA5A8D39228319620083AA76 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AA5A8D3B228319620083AA76 /* ProjSulfur.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProjSulfur.entitlements; sourceTree = "<group>"; };
+		AA5A8D422283199D0083AA76 /* libtcod.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtcod.dylib; path = lib/libtcod.dylib; sourceTree = "<group>"; };
+		AA5A8D432283199D0083AA76 /* libtcodgui.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtcodgui.dylib; path = lib/libtcodgui.dylib; sourceTree = "<group>"; };
+		AA5A8D442283199D0083AA76 /* libtcodxx.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtcodxx.dylib; path = lib/libtcodxx.dylib; sourceTree = "<group>"; };
+		AA5A8D66228323780083AA76 /* terminal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = terminal.png; sourceTree = SOURCE_ROOT; };
+		AA5A8D8022832ED50083AA76 /* namegen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = namegen.h; path = ProjSulfur/namegen.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8122832ED50083AA76 /* heightmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = heightmap.h; path = ProjSulfur/heightmap.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8222832ED50083AA76 /* lex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lex.h; path = ProjSulfur/lex.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8322832ED50083AA76 /* noise_defaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = noise_defaults.h; path = ProjSulfur/noise_defaults.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8422832ED50083AA76 /* bsp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bsp.h; path = ProjSulfur/bsp.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8522832ED50083AA76 /* noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = noise.h; path = ProjSulfur/noise.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8622832ED50083AA76 /* parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = parser.h; path = ProjSulfur/parser.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8722832ED50083AA76 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = list.h; path = ProjSulfur/list.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8822832ED50083AA76 /* mersenne_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mersenne_types.h; path = ProjSulfur/mersenne_types.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8922832ED60083AA76 /* sys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sys.h; path = ProjSulfur/sys.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8A22832ED60083AA76 /* path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = path.h; path = ProjSulfur/path.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8B22832ED60083AA76 /* console_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = console_types.h; path = ProjSulfur/console_types.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8C22832ED60083AA76 /* mersenne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mersenne.h; path = ProjSulfur/mersenne.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8D22832ED60083AA76 /* fov_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fov_types.h; path = ProjSulfur/fov_types.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8E22832ED60083AA76 /* tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tree.h; path = ProjSulfur/tree.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D8F22832ED60083AA76 /* color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = color.h; path = ProjSulfur/color.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D9022832ED60083AA76 /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = console.h; path = ProjSulfur/console.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D9122832ED60083AA76 /* libtcod_int.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libtcod_int.h; path = ProjSulfur/libtcod_int.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D9222832ED60083AA76 /* mouse_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mouse_types.h; path = ProjSulfur/mouse_types.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D9322832ED70083AA76 /* image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = image.h; path = ProjSulfur/image.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D9422832ED70083AA76 /* mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mouse.h; path = ProjSulfur/mouse.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D9522832ED70083AA76 /* fov.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fov.h; path = ProjSulfur/fov.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D9622832F300083AA76 /* libtcod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libtcod.h; sourceTree = "<group>"; };
+		AA5A8D9722832F740083AA76 /* bresenham.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bresenham.h; path = ProjSulfur/bresenham.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D9822832F940083AA76 /* txtfield.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = txtfield.h; path = ProjSulfur/txtfield.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D9922832F940083AA76 /* wrappers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wrappers.h; path = ProjSulfur/wrappers.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D9A22832F940083AA76 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zip.h; path = ProjSulfur/zip.h; sourceTree = SOURCE_ROOT; };
+		AA5A8D9B228336190083AA76 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ProjSulfur/README.md; sourceTree = "<group>"; };
+		AA5A8DA0228358630083AA76 /* LifeForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LifeForm.h; sourceTree = "<group>"; };
+		AA5A8DA1228358630083AA76 /* LifeForm.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LifeForm.m; sourceTree = "<group>"; };
+		AA5A8DA3228359F50083AA76 /* Engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
+		AA5A8DA4228359F50083AA76 /* Engine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Engine.m; sourceTree = "<group>"; };
+		AA5A8DA622835E060083AA76 /* Map.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		AA5A8DA722835E060083AA76 /* Map.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
+		AA5B664F22860DDD0091119A /* Critter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Critter.h; sourceTree = "<group>"; };
+		AA5B665022860DDD0091119A /* Critter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Critter.m; sourceTree = "<group>"; };
+		AA5B66522286181E0091119A /* Item.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		AA5B66532286181E0091119A /* Item.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		AA7C6A21228CE6B800007D7E /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
+		AA7F3039228C56C2000FDF66 /* cp437_10x10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp437_10x10.png; sourceTree = SOURCE_ROOT; };
+		AAB9B6B32286B9AE00FBEA98 /* ItemData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ItemData.plist; sourceTree = "<group>"; };
+		AAB9B6B52288A9E500FBEA98 /* Attacker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attacker.h; sourceTree = "<group>"; };
+		AAB9B6B82288AE2F00FBEA98 /* Destructible.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Destructible.h; sourceTree = "<group>"; };
+		AAB9B6B92288B37500FBEA98 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
+		AAB9B6BA2289802D00FBEA98 /* Persistent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Persistent.h; path = ProjSulfur/Persistent.h; sourceTree = SOURCE_ROOT; };
+		AAB9B6BB228AFAA900FBEA98 /* ItemManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemManager.h; sourceTree = "<group>"; };
+		AAB9B6BC228AFAA900FBEA98 /* ItemManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +114,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA7C6A14228CCF4000007D7E /* libtcod.dylib in Frameworks */,
+				AA7C6A15228CCF4200007D7E /* libtcodgui.dylib in Frameworks */,
+				AA7C6A16228CCF4400007D7E /* libtcodxx.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,8 +126,11 @@
 		AA5A8D24228319610083AA76 = {
 			isa = PBXGroup;
 			children = (
+				AAB9B6B92288B37500FBEA98 /* TODO.md */,
+				AA5A8D9B228336190083AA76 /* README.md */,
 				AA5A8D2F228319610083AA76 /* ProjSulfur */,
 				AA5A8D2E228319610083AA76 /* Products */,
+				AA5A8D412283199C0083AA76 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,15 +145,83 @@
 		AA5A8D2F228319610083AA76 /* ProjSulfur */ = {
 			isa = PBXGroup;
 			children = (
+				AA7F3039228C56C2000FDF66 /* cp437_10x10.png */,
+				AA5A8D66228323780083AA76 /* terminal.png */,
+				AA5A8D4B228322890083AA76 /* libtcod files */,
 				AA5A8D30228319610083AA76 /* AppDelegate.h */,
 				AA5A8D31228319610083AA76 /* AppDelegate.m */,
 				AA5A8D33228319620083AA76 /* Assets.xcassets */,
-				AA5A8D35228319620083AA76 /* MainMenu.xib */,
 				AA5A8D38228319620083AA76 /* Info.plist */,
 				AA5A8D39228319620083AA76 /* main.m */,
 				AA5A8D3B228319620083AA76 /* ProjSulfur.entitlements */,
+				AA5A8DA0228358630083AA76 /* LifeForm.h */,
+				AA5A8DA1228358630083AA76 /* LifeForm.m */,
+				AA5A8DA3228359F50083AA76 /* Engine.h */,
+				AA5A8DA4228359F50083AA76 /* Engine.m */,
+				AA5A8DA622835E060083AA76 /* Map.h */,
+				AA5A8DA722835E060083AA76 /* Map.m */,
+				AA20FE68228451BB009D01DB /* HUD.h */,
+				AA20FE69228451BB009D01DB /* HUD.m */,
+				AA20FE6B22845EA6009D01DB /* LFNameGen.h */,
+				AA20FE6C22845EA6009D01DB /* LFNameGen.m */,
+				AA20FE6E22845FA0009D01DB /* ork.plist */,
+				AAB9B6B32286B9AE00FBEA98 /* ItemData.plist */,
+				AA5B664F22860DDD0091119A /* Critter.h */,
+				AA5B665022860DDD0091119A /* Critter.m */,
+				AA5B66522286181E0091119A /* Item.h */,
+				AA5B66532286181E0091119A /* Item.m */,
+				AAB9B6B52288A9E500FBEA98 /* Attacker.h */,
+				AAB9B6B82288AE2F00FBEA98 /* Destructible.h */,
+				AAB9B6BA2289802D00FBEA98 /* Persistent.h */,
+				AAB9B6BB228AFAA900FBEA98 /* ItemManager.h */,
+				AAB9B6BC228AFAA900FBEA98 /* ItemManager.m */,
 			);
 			path = ProjSulfur;
+			sourceTree = "<group>";
+		};
+		AA5A8D412283199C0083AA76 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AA7C6A21228CE6B800007D7E /* SDL2.framework */,
+				AA5A8D422283199D0083AA76 /* libtcod.dylib */,
+				AA5A8D432283199D0083AA76 /* libtcodgui.dylib */,
+				AA5A8D442283199D0083AA76 /* libtcodxx.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AA5A8D4B228322890083AA76 /* libtcod files */ = {
+			isa = PBXGroup;
+			children = (
+				AA5A8D9822832F940083AA76 /* txtfield.h */,
+				AA5A8D9922832F940083AA76 /* wrappers.h */,
+				AA5A8D9A22832F940083AA76 /* zip.h */,
+				AA5A8D9722832F740083AA76 /* bresenham.h */,
+				AA5A8D9622832F300083AA76 /* libtcod.h */,
+				AA5A8D8422832ED50083AA76 /* bsp.h */,
+				AA5A8D8F22832ED60083AA76 /* color.h */,
+				AA5A8D8B22832ED60083AA76 /* console_types.h */,
+				AA5A8D9022832ED60083AA76 /* console.h */,
+				AA5A8D8D22832ED60083AA76 /* fov_types.h */,
+				AA5A8D9522832ED70083AA76 /* fov.h */,
+				AA5A8D8122832ED50083AA76 /* heightmap.h */,
+				AA5A8D9322832ED70083AA76 /* image.h */,
+				AA5A8D8222832ED50083AA76 /* lex.h */,
+				AA5A8D9122832ED60083AA76 /* libtcod_int.h */,
+				AA5A8D8722832ED50083AA76 /* list.h */,
+				AA5A8D8822832ED50083AA76 /* mersenne_types.h */,
+				AA5A8D8C22832ED60083AA76 /* mersenne.h */,
+				AA5A8D9222832ED60083AA76 /* mouse_types.h */,
+				AA5A8D9422832ED70083AA76 /* mouse.h */,
+				AA5A8D8022832ED50083AA76 /* namegen.h */,
+				AA5A8D8322832ED50083AA76 /* noise_defaults.h */,
+				AA5A8D8522832ED50083AA76 /* noise.h */,
+				AA5A8D8622832ED50083AA76 /* parser.h */,
+				AA5A8D8A22832ED60083AA76 /* path.h */,
+				AA5A8D8922832ED60083AA76 /* sys.h */,
+				AA5A8D8E22832ED60083AA76 /* tree.h */,
+			);
+			path = "libtcod files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -75,6 +234,7 @@
 				AA5A8D29228319610083AA76 /* Sources */,
 				AA5A8D2A228319610083AA76 /* Frameworks */,
 				AA5A8D2B228319610083AA76 /* Resources */,
+				AA7C6A25228CE7C500007D7E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -122,8 +282,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAB9B6B42286B9AE00FBEA98 /* ItemData.plist in Resources */,
 				AA5A8D34228319620083AA76 /* Assets.xcassets in Resources */,
-				AA5A8D37228319620083AA76 /* MainMenu.xib in Resources */,
+				AA20FE6F22845FA0009D01DB /* ork.plist in Resources */,
+				AA5A8D67228323780083AA76 /* terminal.png in Resources */,
+				AA7F303A228C56C2000FDF66 /* cp437_10x10.png in Resources */,
+				AA5A8D9C228336190083AA76 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,23 +298,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA5B66542286181E0091119A /* Item.m in Sources */,
 				AA5A8D3A228319620083AA76 /* main.m in Sources */,
+				AA5B665122860DDD0091119A /* Critter.m in Sources */,
+				AA5A8DA822835E060083AA76 /* Map.m in Sources */,
+				AA5A8DA5228359F50083AA76 /* Engine.m in Sources */,
+				AA20FE6A228451BB009D01DB /* HUD.m in Sources */,
+				AAB9B6BD228AFAA900FBEA98 /* ItemManager.m in Sources */,
+				AA20FE6D22845EA6009D01DB /* LFNameGen.m in Sources */,
+				AA5A8DA2228358630083AA76 /* LifeForm.m in Sources */,
 				AA5A8D32228319610083AA76 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		AA5A8D35228319620083AA76 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA5A8D36228319620083AA76 /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		AA5A8D3C228319620083AA76 /* Debug */ = {
@@ -271,10 +432,19 @@
 				CODE_SIGN_ENTITLEMENTS = ProjSulfur/ProjSulfur.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/lib",
+				);
 				INFOPLIST_FILE = ProjSulfur/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpharez.ProjSulfur;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -288,10 +458,19 @@
 				CODE_SIGN_ENTITLEMENTS = ProjSulfur/ProjSulfur.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/lib",
+				);
 				INFOPLIST_FILE = ProjSulfur/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.alpharez.ProjSulfur;
 				PRODUCT_NAME = "$(TARGET_NAME)";

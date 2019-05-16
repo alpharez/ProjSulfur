@@ -7,7 +7,22 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "libtcod.h"
+#import "Engine.h"
 
 int main(int argc, const char * argv[]) {
-    return NSApplicationMain(argc, argv);
+    char *title = "Project Sulfur";
+    
+    Engine *e = [[Engine alloc] init];   // init game engine
+    
+    //TCOD_namegen
+    TCOD_console_init_root(SCREEN_WIDTH, SCREEN_HEIGHT, title, false, TCOD_RENDERER_SDL);
+    [e render];
+    TCOD_console_flush();
+    while (! TCOD_console_is_window_closed()) {
+        [e update];
+        [e render];
+        TCOD_console_flush();
+    }
+    return 0;
 }
