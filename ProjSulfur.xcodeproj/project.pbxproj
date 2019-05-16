@@ -14,7 +14,6 @@
 		AA5A8D34228319620083AA76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA5A8D33228319620083AA76 /* Assets.xcassets */; };
 		AA5A8D3A228319620083AA76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5A8D39228319620083AA76 /* main.m */; };
 		AA5A8D67228323780083AA76 /* terminal.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5A8D66228323780083AA76 /* terminal.png */; };
-		AA5A8D9C228336190083AA76 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AA5A8D9B228336190083AA76 /* README.md */; };
 		AA5A8DA2228358630083AA76 /* LifeForm.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5A8DA1228358630083AA76 /* LifeForm.m */; };
 		AA5A8DA5228359F50083AA76 /* Engine.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5A8DA4228359F50083AA76 /* Engine.m */; };
 		AA5A8DA822835E060083AA76 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5A8DA722835E060083AA76 /* Map.m */; };
@@ -24,6 +23,7 @@
 		AA7C6A15228CCF4200007D7E /* libtcodgui.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5A8D432283199D0083AA76 /* libtcodgui.dylib */; };
 		AA7C6A16228CCF4400007D7E /* libtcodxx.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5A8D442283199D0083AA76 /* libtcodxx.dylib */; };
 		AA7C6A24228CE7C500007D7E /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AA7C6A21228CE6B800007D7E /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AA7C6A27228D808A00007D7E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AA7C6A26228D808900007D7E /* README.md */; };
 		AA7F303A228C56C2000FDF66 /* cp437_10x10.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7F3039228C56C2000FDF66 /* cp437_10x10.png */; };
 		AAB9B6B42286B9AE00FBEA98 /* ItemData.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAB9B6B32286B9AE00FBEA98 /* ItemData.plist */; };
 		AAB9B6BD228AFAA900FBEA98 /* ItemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB9B6BC228AFAA900FBEA98 /* ItemManager.m */; };
@@ -87,7 +87,6 @@
 		AA5A8D9822832F940083AA76 /* txtfield.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = txtfield.h; path = ProjSulfur/txtfield.h; sourceTree = SOURCE_ROOT; };
 		AA5A8D9922832F940083AA76 /* wrappers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wrappers.h; path = ProjSulfur/wrappers.h; sourceTree = SOURCE_ROOT; };
 		AA5A8D9A22832F940083AA76 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zip.h; path = ProjSulfur/zip.h; sourceTree = SOURCE_ROOT; };
-		AA5A8D9B228336190083AA76 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ProjSulfur/README.md; sourceTree = "<group>"; };
 		AA5A8DA0228358630083AA76 /* LifeForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LifeForm.h; sourceTree = "<group>"; };
 		AA5A8DA1228358630083AA76 /* LifeForm.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LifeForm.m; sourceTree = "<group>"; };
 		AA5A8DA3228359F50083AA76 /* Engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
@@ -99,6 +98,7 @@
 		AA5B66522286181E0091119A /* Item.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		AA5B66532286181E0091119A /* Item.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		AA7C6A21228CE6B800007D7E /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
+		AA7C6A26228D808900007D7E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AA7F3039228C56C2000FDF66 /* cp437_10x10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp437_10x10.png; sourceTree = SOURCE_ROOT; };
 		AAB9B6B32286B9AE00FBEA98 /* ItemData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ItemData.plist; sourceTree = "<group>"; };
 		AAB9B6B52288A9E500FBEA98 /* Attacker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attacker.h; sourceTree = "<group>"; };
@@ -126,8 +126,8 @@
 		AA5A8D24228319610083AA76 = {
 			isa = PBXGroup;
 			children = (
+				AA7C6A26228D808900007D7E /* README.md */,
 				AAB9B6B92288B37500FBEA98 /* TODO.md */,
-				AA5A8D9B228336190083AA76 /* README.md */,
 				AA5A8D2F228319610083AA76 /* ProjSulfur */,
 				AA5A8D2E228319610083AA76 /* Products */,
 				AA5A8D412283199C0083AA76 /* Frameworks */,
@@ -282,12 +282,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA7C6A27228D808A00007D7E /* README.md in Resources */,
 				AAB9B6B42286B9AE00FBEA98 /* ItemData.plist in Resources */,
 				AA5A8D34228319620083AA76 /* Assets.xcassets in Resources */,
 				AA20FE6F22845FA0009D01DB /* ork.plist in Resources */,
 				AA5A8D67228323780083AA76 /* terminal.png in Resources */,
 				AA7F303A228C56C2000FDF66 /* cp437_10x10.png in Resources */,
-				AA5A8D9C228336190083AA76 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
