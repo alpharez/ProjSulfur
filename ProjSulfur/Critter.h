@@ -19,8 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 -(id)initWithXPos:(int)x andY:(int)y andColor:(TCOD_color_t) col;
 -(id)initWithXPos:(int)x andY:(int)y andColor:(TCOD_color_t) col andChar:(char) c;
 -(void)rollAbilities;
--(void)moveDown;
+-(int)toCameraCoordinatesX:(int) x;
+-(int)toCameraCoordinatesY:(int) y;
 -(void)render;
+-(void)renderWithCameraX:(int)x andY:(int)y;
 -(void)update;
 -(void)attack;
 -(void)moveOrAttack:(id)lf;

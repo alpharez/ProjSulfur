@@ -20,33 +20,49 @@
 
 -(id)init {
     self = [super init];
-    TCOD_console_set_custom_font("cp437_10x10.png", TCOD_FONT_TYPE_GREYSCALE | TCOD_FONT_LAYOUT_ASCII_INROW, 16, 16);
+    TCOD_console_set_custom_font("cp437_10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 16);
     int playerRandX = TCOD_random_get_int(NULL, 1, MAP_WIDTH - 10);
     int playerRandY = TCOD_random_get_int(NULL, 1, MAP_HEIGHT - 25);
     
     player = [[LifeForm alloc] initWithXPos:playerRandX andY:playerRandY andColor:TCOD_yellow andChar:'@'];
     computeFov = true;  // we want to compute intial field of view.
-    // all life
-    _lifeForms = [[NSMutableArray alloc] init];
+    _lifeForms = [[NSMutableArray alloc] init];  // all life
     //[_lifeForms addObject:[[LifeForm alloc] initWithXPos:11 andY:32 andColor:TCOD_red andChar:'\02']];
     //[_lifeForms addObject:[[LifeForm alloc] initWithXPos:14 andY:30 andColor:TCOD_red andChar:'\02']];
-    // Critters make some critters to kill, evolved mega-hamsters!
-    //critter_list = [[NSMutableArray alloc] init];
-    int max_critters_per_level = 4;
-    for(int i=0; i<max_critters_per_level; i++ ) {
-        int randX = TCOD_random_get_int(NULL, 1, MAP_WIDTH - 10);
-        int randY = TCOD_random_get_int(NULL, 1, MAP_HEIGHT - 25);
-        [_lifeForms addObject:[[Critter alloc] initWithXPos:randX andY:randY andColor:TCOD_azure andChar:'\176']];
-    }
+    
+    
+    zone1 = [[Map alloc] init];  // init zone 1 map
+    [zone1 createZoneRoom:1 withRoom:1 playerStartAtX:playerRandX andY:playerRandY]; // create first room
+    // items
     _items = [[NSMutableArray alloc] init];  // non-organic items
     ItemManager *im = [[ItemManager alloc] init];  // initialize item manager
     _items = [im zone1Items];  // get zone1items from item manager
-    zone1 = [[Map alloc] init];  // init zone 1 map
-    [zone1 createZoneRoom:1 withRoom:1 playerStartAtX:playerRandX andY:playerRandY]; // create first room
+    // baddies
+    int max_critters_per_level = 115;
+    int randX, randY;
+    for(int i=0; i<max_critters_per_level; i++ ) {
+        do {
+            randX = TCOD_random_get_int(NULL, 1, MAP_WIDTH - 10);
+            randY = TCOD_random_get_int(NULL, 1, MAP_HEIGHT - 25);
+        } while(![zone1 isRoomX:randX andY:randY]); // then loop until in a room
+        [_lifeForms addObject:[[Critter alloc] initWithXPos:randX andY:randY andColor:TCOD_azure andChar:'\176']];
+    }
+    // place items
+    for(Item *item in _items) {
+        do {
+            randX = TCOD_random_get_int(NULL, 1, MAP_WIDTH - 10);
+            randY = TCOD_random_get_int(NULL, 1, MAP_HEIGHT - 25);
+        } while(![zone1 isRoomX:randX andY:randY]); // then loop until in a room
+        [item setlocation:randX andY:randY];
+    }
+    
     hud = [[HUD alloc] init];  // init HUD
     [player.items addObject:[[Item alloc] initItem:chemLight withX:9 andY:9 withText:@"chem light" andCode:@""]]; // player starts with a chemlight
     [hud message:@"It smells old and musty here.  You shake a chem light to get a better look." color:TCOD_lime];
     [hud message:@"There's some ambient light, but not much.  Your eyes strain to see." color:TCOD_lime];
+    char numItemsLifeForms[64];
+    sprintf(numItemsLifeForms, "Num Items in game: %lu, life forms: %lu", (unsigned long)[_items count] , (unsigned long)[_lifeForms count]);
+    [hud message:[NSString stringWithUTF8String:numItemsLifeForms] color:TCOD_gold];
     [zone1 computeFOV:player.x andY:player.y]; // compute initial fov
     TCOD_sys_set_fps(30); // limit FPS to 30 or else it will go nuts
     gameStatus = STARTUP;
@@ -56,22 +72,22 @@
  @brief Engine display everything to TCOD root console
  */
 -(void)render {
-    TCOD_console_clear(NULL);
-    
-    [zone1 render:player.x y:player.y];
-    
-
+    TCOD_console_clear(NULL);  // clear root console
+    [zone1 render:player.x y:player.y];  // render zone and pass player location
+    // render life forms
     for(LifeForm *lf in _lifeForms) {
         if( [zone1 isInFOVX:lf.x andY:lf.y]) {
-            [lf render];
+            [lf renderWithCameraX:zone1.cameraX andY:zone1.cameraY];
         }
     }
+    // render items
     for(Item *i in _items) {
         if( [zone1 isInFOVX:i.x andY:i.y]) {
-            [i render];
+            [i renderWithCameraX:zone1.cameraX andY:zone1.cameraY];
         }
     }
-    [player render]; // render player last
+    //[player render]; // render player last
+    [player renderWithCameraX:zone1.cameraX andY:zone1.cameraY];
     [hud render:player];  // render HUD with player info
 }
 
@@ -116,6 +132,22 @@
 }
 
 /*!
+ @brief player has just moved
+ @discussion computeFov and set gameStatus so others can take their turn... also check tile that player is on for items
+ */
+-(void)playerMoved {
+    computeFov = true;
+    gameStatus = NEW_TURN;
+    // check if items here
+    for(Item *item in _items) {
+        if((player.x == item.x) && (player.y == item.y)) {
+            [hud message:[NSString stringWithFormat:@"There is a %@ here.", item.name] color:TCOD_lime];
+            break;
+        }
+    }
+}
+
+/*!
  @brief Engine update method
  */
 -(void)update {
@@ -124,14 +156,12 @@
     // 8 way movement surrounding 'j'
     // h left, j down, k up, l right
     // y up/left, u up/right, b down/left, n down/right
-    
     switch(key.vk) {
         case TCODK_UP :
             if( ![zone1 isWallX:player.x andY:player.y-1] ) {
                 if( ![self checkTileAtX:player.x andY:player.y-1] ) {
                     [player moveUp];
-                    computeFov = true;
-                    gameStatus = NEW_TURN;
+                    [self playerMoved];
                 }
             } else {
                 [hud message:@"You hit a wall" color:TCOD_white];
@@ -141,8 +171,7 @@
             if( ![zone1 isWallX:player.x andY:player.y+1] ) {
                 if( ![self checkTileAtX:player.x andY:player.y+1] ) {
                     [player moveDown];
-                    computeFov = true;
-                    gameStatus = NEW_TURN;
+                    [self playerMoved];
                 }
             } else {
                 [hud message:@"You hit a wall" color:TCOD_white];
@@ -152,8 +181,7 @@
             if( ![zone1 isWallX:player.x-1 andY:player.y] ) {
                 if( ![self checkTileAtX:player.x-1 andY:player.y] ) {
                     [player moveLeft];
-                    computeFov = true;
-                    gameStatus = NEW_TURN;
+                    [self playerMoved];
                 }
             } else {
                 [hud message:@"You hit a wall" color:TCOD_white];
@@ -163,8 +191,7 @@
             if( ![zone1 isWallX:player.x+1 andY:player.y] ) {
                 if( ![self checkTileAtX:player.x+1 andY:player.y] ) {
                     [player moveRight];
-                    computeFov = true;
-                    gameStatus = NEW_TURN;
+                    [self playerMoved];
                 }
             } else {
                 [hud message:@"You hit a wall" color:TCOD_white];
@@ -179,8 +206,7 @@
                 if( ![zone1 isWallX:player.x andY:player.y-1] ) {
                     if( ![self checkTileAtX:player.x andY:player.y-1] ) {
                         [player moveUp];
-                        computeFov = true;
-                        gameStatus = NEW_TURN;
+                        [self playerMoved];
                     }
                 } else {
                     [hud message:@"You hit a wall" color:TCOD_white];
@@ -191,8 +217,7 @@
                 if( ![zone1 isWallX:player.x andY:player.y+1] ) {
                     if( ![self checkTileAtX:player.x andY:player.y+1] ) {
                         [player moveDown];
-                        computeFov = true;
-                        gameStatus = NEW_TURN;
+                        [self playerMoved];
                     }
                 } else {
                     [hud message:@"You hit a wall" color:TCOD_white];
@@ -203,8 +228,7 @@
                 if( ![zone1 isWallX:player.x-1 andY:player.y] ) {
                     if( ![self checkTileAtX:player.x-1 andY:player.y] ) {
                         [player moveLeft];
-                        computeFov = true;
-                        gameStatus = NEW_TURN;
+                        [self playerMoved];
                     }
                 } else {
                     [hud message:@"You hit a wall" color:TCOD_white];
@@ -215,8 +239,7 @@
                 if( ![zone1 isWallX:player.x+1 andY:player.y] ) {
                     if( ![self checkTileAtX:player.x+1 andY:player.y] ) {
                         [player moveRight];
-                        computeFov = true;
-                        gameStatus = NEW_TURN;
+                        [self playerMoved];
                     }
                 } else {
                     [hud message:@"You hit a wall" color:TCOD_white];
@@ -227,8 +250,7 @@
                 if( ![zone1 isWallX:player.x-1 andY:player.y-1] ) {
                     if( ![self checkTileAtX:player.x-1 andY:player.y-1] ) {
                         [player moveUpLeft];
-                        computeFov = true;
-                        gameStatus = NEW_TURN;
+                        [self playerMoved];
                     }
                 } else {
                     [hud message:@"You hit a wall" color:TCOD_white];
@@ -239,8 +261,7 @@
                 if( ![zone1 isWallX:player.x+1 andY:player.y-1] ) {
                     if( ![self checkTileAtX:player.x+1 andY:player.y-1] ) {
                         [player moveUpRight];
-                        computeFov = true;
-                        gameStatus = NEW_TURN;
+                        [self playerMoved];
                     }
                 } else {
                     [hud message:@"You hit a wall" color:TCOD_white];
@@ -251,8 +272,7 @@
                 if( ![zone1 isWallX:player.x-1 andY:player.y+1] ) {
                     if( ![self checkTileAtX:player.x-1 andY:player.y+1] ) {
                         [player moveDownLeft];
-                        computeFov = true;
-                        gameStatus = NEW_TURN;
+                        [self playerMoved];
                     }
                 } else {
                     [hud message:@"You hit a wall" color:TCOD_white];
@@ -263,8 +283,7 @@
                 if( ![zone1 isWallX:player.x+1 andY:player.y+1] ) {
                     if( ![self checkTileAtX:player.x+1 andY:player.y+1] ) {
                         [player moveDownRight];
-                        computeFov = true;
-                        gameStatus = NEW_TURN;
+                        [self playerMoved];
                     }
                 } else {
                     [hud message:@"You hit a wall" color:TCOD_white];
@@ -293,10 +312,11 @@
                 break;
             }
             if(key.c == 't') { // terminal
+                // not needed at the moment since running into a terminal triggers it.
                 //NSString *scrambled = [self ancientTextTranslator:ancient readingSkill:player.readingSkill max:100];
                 //[hud showTerminal:scrambled];
             }
-            if(key.c == 'c') { // character sheet
+            if(key.c == 'c') { // show character sheet
                 [hud characterSheet:player];
             }
             break;
@@ -342,7 +362,7 @@
         for (int i = 0; i < length; i++)
         {
             if(pctRightIdx == ipctRight) {
-                if(UTF8Str[i] > 'A' && UTF8Str[i] < 'm') UTF8Str[i] += 13;
+                if(UTF8Str[i] > 'A' && UTF8Str[i] < 'm') UTF8Str[i] += 13;  // rot13
                 pctRightIdx = 0;
             }
             pctRightIdx++;

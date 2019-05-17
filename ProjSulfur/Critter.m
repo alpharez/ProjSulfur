@@ -46,13 +46,26 @@
     [super rollAbilities];
 }
 
--(void)moveDown {
-    //[super moveDown];
+-(int)toCameraCoordinatesX:(int) x {
+    return x - CAMERA_WIDTH; // cameraX
+}
+
+-(int)toCameraCoordinatesY:(int) y {
+    return y - CAMERA_HEIGHT;  // camerY!
 }
 
 -(void)render {
-    TCOD_console_put_char(NULL, _x, _y, _c, TCOD_BKGND_ALPH);
-    TCOD_console_set_char_foreground(NULL, _x, _y, _col);
+    // adjust for camera
+    int x = [self toCameraCoordinatesX: _x];
+    int y = [self toCameraCoordinatesY: _y];
+    NSLog(@"Render Critter (%d,%d) cam(%d,%d)", _x, _y, x, y);
+    TCOD_console_put_char(NULL, x, y, _c, TCOD_BKGND_ALPH);
+    TCOD_console_set_char_foreground(NULL, x, y, _col);
+}
+
+-(void)renderWithCameraX:(int)x andY:(int)y {
+    TCOD_console_put_char(NULL, _x - x, _y - y, _c, TCOD_BKGND_ALPH);
+    TCOD_console_set_char_foreground(NULL, _x - x, _y - y, _col);
 }
 
 -(void)update {

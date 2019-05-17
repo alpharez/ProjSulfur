@@ -19,7 +19,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Map : NSObject {
-    Boolean tiles[MAP_WIDTH][MAP_HEIGHT];
+    Boolean tiles[MAP_WIDTH][MAP_HEIGHT]; // explored?
+    Boolean room[MAP_WIDTH][MAP_HEIGHT]; // is this in a room?
 }
 
 /*! @brief Zone1 TCOD map */
@@ -44,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(Boolean)isInFOVX:(int) x andY:(int) y;
 -(Boolean)isWallX:(int) x andY:(int) y;
 -(Boolean)canWalkX:(int) x andY:(int) y;
+-(Boolean)isRoomX:(int) x andY:(int) y;
 -(void)computeFOV:(int) x andY:(int) y;
 -(void)setWallPosX:(int) x andY:(int) y;
 -(void)createZoneRoom:(int)zone withRoom:(int)room playerStartAtX:(int)x andY:(int)y;

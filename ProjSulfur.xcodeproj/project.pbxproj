@@ -25,6 +25,7 @@
 		AAB79744228D91F1009ACEB0 /* libtcodxx.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB79741228D91F1009ACEB0 /* libtcodxx.dylib */; };
 		AAB79745228D91F1009ACEB0 /* libtcod.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB79742228D91F1009ACEB0 /* libtcod.dylib */; };
 		AAB79747228D9208009ACEB0 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AAB7973E228D9166009ACEB0 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AAB7974A228F4F69009ACEB0 /* TerminalMesgs.strings in Resources */ = {isa = PBXBuildFile; fileRef = AAB79749228F4F69009ACEB0 /* TerminalMesgs.strings */; };
 		AAB9B6B42286B9AE00FBEA98 /* ItemData.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAB9B6B32286B9AE00FBEA98 /* ItemData.plist */; };
 		AAB9B6BD228AFAA900FBEA98 /* ItemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB9B6BC228AFAA900FBEA98 /* ItemManager.m */; };
 /* End PBXBuildFile section */
@@ -100,6 +101,7 @@
 		AAB79740228D91F1009ACEB0 /* libtcodgui.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtcodgui.dylib; path = lib/libtcodgui.dylib; sourceTree = "<group>"; };
 		AAB79741228D91F1009ACEB0 /* libtcodxx.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtcodxx.dylib; path = lib/libtcodxx.dylib; sourceTree = "<group>"; };
 		AAB79742228D91F1009ACEB0 /* libtcod.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtcod.dylib; path = lib/libtcod.dylib; sourceTree = "<group>"; };
+		AAB79749228F4F69009ACEB0 /* TerminalMesgs.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = TerminalMesgs.strings; sourceTree = "<group>"; };
 		AAB9B6B32286B9AE00FBEA98 /* ItemData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ItemData.plist; sourceTree = "<group>"; };
 		AAB9B6B52288A9E500FBEA98 /* Attacker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attacker.h; sourceTree = "<group>"; };
 		AAB9B6B82288AE2F00FBEA98 /* Destructible.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Destructible.h; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				AA20FE6C22845EA6009D01DB /* LFNameGen.m */,
 				AA20FE6E22845FA0009D01DB /* ork.plist */,
 				AAB9B6B32286B9AE00FBEA98 /* ItemData.plist */,
+				AAB79749228F4F69009ACEB0 /* TerminalMesgs.strings */,
 				AA5B664F22860DDD0091119A /* Critter.h */,
 				AA5B665022860DDD0091119A /* Critter.m */,
 				AA5B66522286181E0091119A /* Item.h */,
@@ -284,6 +287,7 @@
 			files = (
 				AA7C6A27228D808A00007D7E /* README.md in Resources */,
 				AAB9B6B42286B9AE00FBEA98 /* ItemData.plist in Resources */,
+				AAB7974A228F4F69009ACEB0 /* TerminalMesgs.strings in Resources */,
 				AA5A8D34228319620083AA76 /* Assets.xcassets in Resources */,
 				AA20FE6F22845FA0009D01DB /* ork.plist in Resources */,
 				AA5A8D67228323780083AA76 /* terminal.png in Resources */,

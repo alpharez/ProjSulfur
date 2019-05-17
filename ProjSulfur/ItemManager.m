@@ -31,6 +31,7 @@
     zone3Items = [[NSMutableArray alloc] init];
     zone4Items = [[NSMutableArray alloc] init];
     zone5Items = [[NSMutableArray alloc] init];
+    int randX, randY, randItem, randString;
     for(NSString *t in temp) {
         NSDictionary *item = [temp objectForKey:t];
         //NSString *name = [item objectForKey:@"name"];
@@ -73,12 +74,13 @@
         } else {
             t = plant;
         }
-        int randX = TCOD_random_get_int(NULL, 1, MAP_WIDTH - 10);
-        int randY = TCOD_random_get_int(NULL, 1, MAP_HEIGHT - 25);
+        randX = TCOD_random_get_int(NULL, 1, MAP_WIDTH - 10);
+        randY = TCOD_random_get_int(NULL, 1, MAP_HEIGHT - 25);
         Item *gameItem = [[Item alloc] initItem:t withX:randX andY:randY withText:message andCode:access_code];
         
         switch([zone integerValue]) {
             case 1:
+                //for(int n=0; n<1000; n++)
                 [zone1Items addObject:gameItem];
                 break;
             case 2:
@@ -98,6 +100,22 @@
                 break;
         }
         
+    }
+    // get strings from file
+    NSString *fname = [[NSBundle mainBundle] pathForResource:@"TerminalMesgs" ofType:@"strings"];
+    NSDictionary *d = [NSDictionary dictionaryWithContentsOfFile:fname];
+    NSArray *allTermStrings = d.allValues;
+    NSString *itemName;
+    // add a bunch more items
+    for(int n=0; n< 166; n++) {
+        itemName = @"random item";
+        randItem = TCOD_random_get_int(NULL, health, trap);
+        if(randItem == terminal) {
+            randString = TCOD_random_get_int(NULL, 0, (int)[allTermStrings count]-1);
+            itemName = [allTermStrings objectAtIndex:randString];
+        }
+        Item *gameItem = [[Item alloc] initItem:randItem withX:0 andY:0 withText:itemName andCode:@"0000"];
+        [zone1Items addObject:gameItem];
     }
     return self;
 }

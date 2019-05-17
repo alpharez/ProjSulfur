@@ -1,9 +1,6 @@
 #  TODO
-
-## Scrolling a big zone
-
-make every map connect... ok so 
-make doors
+ 
+## make doors
 
 ## make 5 zones down
 
@@ -38,3 +35,10 @@ make doors
 ## smaller rooms, more rooms...
 
 ## creepy ambient music
+
+## allow player to use items in inventory... especially consumables.
+
+torch should have a life span so the player needs to find another one along the way.
+player should *need* the health kits.
+weapons should do something
+

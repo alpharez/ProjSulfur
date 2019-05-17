@@ -160,7 +160,7 @@
     TCOD_console_set_default_foreground(charsheet, TCOD_sea);
     TCOD_console_set_default_background(charsheet, TCOD_black);
     TCOD_console_print_frame(charsheet, 0, 0, cs_width, cs_height, true, TCOD_BKGND_DEFAULT, [[player name] UTF8String]);
-    
+    TCOD_console_print(charsheet, 25, 1, "Pos (%d,%d)", player.x, player.y);
     TCOD_console_print(charsheet, 2, 1, "%s %s", "Name: ", [[player name] UTF8String]);
     TCOD_console_print(charsheet, 2, 2, "%s %d", "Health: ", [player health]);
     TCOD_console_print(charsheet, 2, 3, "%s %d", "XP: ", [player xp]);

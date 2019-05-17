@@ -49,6 +49,7 @@ typedef enum {
 -(void)update;
 -(Boolean)checkTileAtX:(int)x andY:(int)y;
 -(NSString *)ancientTextTranslator:(NSString *)text readingSkill:(int)skill max:(int)maxSkill;
+-(void)playerMoved;
 
 @end
 

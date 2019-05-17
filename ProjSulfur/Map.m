@@ -32,6 +32,7 @@
     for(int w=0; w<MAP_WIDTH; w++) {
         for(int h=0; h<MAP_HEIGHT; h++) {
             tiles[w][h] = false;
+            room[w][h] = false;
             TCOD_map_set_properties(_zone1,w,h,false,false); /* blck */
         }
     }
@@ -150,6 +151,10 @@
     }
 }
 
+-(Boolean)isRoomX:(int) x andY:(int) y {
+    return room[x][y];
+}
+
 -(void)computeFOV:(int) x andY:(int) y {
     
     TCOD_map_compute_fov(_zone1, x, y, torchRadius, true, (TCOD_fov_algorithm_t)0);
@@ -197,6 +202,7 @@
     for (int tilex=x1; tilex <= x2; tilex++) {
         for (int tiley=y1; tiley <= y2; tiley++) {
             tiles[tilex][tiley] = false;  // explored?
+            room[tilex][tiley] = true; // this a room tile
             TCOD_map_set_properties(_zone1, tilex, tiley, true, true); // this makes a room
         }
     }
@@ -250,7 +256,6 @@
             TCOD_color_t base = ( wall ? _darkWall : _darkGround);
             TCOD_color_t light = ( wall ? _lightWall : _lightGround);
             float r=(mapX-px+dx)*(mapX-px+dx)+(mapY-py+dy)*(mapY-py+dy); /* cell distance to torch (squared) */
-            //float r=(adjx-px+dx)*(adjx-px+dx)+(adjy-py+dy)*(adjy-py+dy); /* cell distance to torch (squared) */
             if(!visible) {
                 if( tiles[mapX][mapY]) {
                     TCOD_console_set_char_background(NULL, conX, conY,

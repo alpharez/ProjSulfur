@@ -167,6 +167,11 @@
     TCOD_console_set_char_foreground(NULL, _x - MAP_WIDTH, _y - MAP_HEIGHT, _col);
 }
 
+-(void)renderWithCameraX:(int)x andY:(int)y {
+    TCOD_console_put_char(NULL, _x - x, _y - y, _c, TCOD_BKGND_ALPH);
+    TCOD_console_set_char_foreground(NULL, _x - x, _y - y, _col);
+}
+
 -(void)update {
     if(!_isDestroyed) { // this life form isn't dead yet
         // move or attack

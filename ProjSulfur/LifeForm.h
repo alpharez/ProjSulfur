@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)moveDownLeft;
 -(void)moveDownRight;
 -(void)render;
+-(void)renderWithCameraX:(int)x andY:(int) y;
 -(void)update;
 -(int)getHighest3Rolls;
 -(int)rollD6;

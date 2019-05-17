@@ -68,7 +68,9 @@ typedef enum {
     /// stairs
     stairs,
     /// chem light
-    chemLight
+    chemLight,
+    /// trap
+    trap
 } itemType;
 
 @property(nonatomic, readwrite) NSString *name;
@@ -81,7 +83,8 @@ typedef enum {
 @property(nonatomic, readwrite) int y;
 
 -(id)initItem:(itemType)item withX:(int)x andY:(int)y withText:(NSString *)text andCode:(NSString *)accessCode;
--(void)render;
+//-(void)render;
+-(void)renderWithCameraX:(int)x andY:(int) y;
 -(void)setlocation:(int)x andY:(int)y;
 @end
 

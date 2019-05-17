@@ -96,3 +96,9 @@ Can i use this for persistence?
 <#statements#>
 }
 */
+
+## Markov Text Generator
+
+https://medium.com/procedural-stories/using-procedural-text-generation-techniques-to-write-cool-stories-4fa4cf74a72a
+
+A lot of the terminals in the game would not show anything relevant to the game.

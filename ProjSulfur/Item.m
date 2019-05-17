@@ -65,8 +65,11 @@
         case dropShip:
             _c = '\170'; _col = TCOD_copper; _weight = 5152.0; _name = @"drop ship"; break;
         case light:
+            _c = '\35'; _col = TCOD_copper; _weight = 250.4; _name = @"light"; break;
         case chemLight:
-            _c = '\35'; _col = TCOD_copper; _weight = 5152.0; _name = @"chem light"; break;
+            _c = '\35'; _col = TCOD_copper; _weight = 0.2; _name = @"chem light"; break;
+        case trap:
+            _c = '_'; _col = TCOD_blue; _weight = 155.0; _name = @"trap"; break;  // raise alarm, spawn bots
         default:
             _c = '9'; _col = TCOD_copper; _weight = 55.0; _name = @"error"; break;
     }
@@ -76,9 +79,18 @@
 /*!
  @brief show item object on screen
  */
+/*
 -(void)render {
     TCOD_console_put_char(NULL, _x, _y, _c, TCOD_BKGND_ALPH);
     TCOD_console_set_char_foreground(NULL, _x, _y, _col);
+}*/
+
+/*!
+ @brief show item object on camera
+ */
+-(void)renderWithCameraX:(int)x andY:(int)y {
+    TCOD_console_put_char(NULL, _x - x, _y - y, _c, TCOD_BKGND_ALPH);
+    TCOD_console_set_char_foreground(NULL, _x - x, _y - y, _col);
 }
 
 /*!
@@ -89,6 +101,7 @@
 -(void)setlocation:(int)x andY:(int)y {
     _x = x;
     _y = y;
+    NSLog(@"Item %@ Location %d,%d", _name, _x, _y);
 }
 
 @end
