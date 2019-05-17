@@ -73,8 +73,8 @@
         } else {
             t = plant;
         }
-        int randX = TCOD_random_get_int(NULL, 1, SCREEN_WIDTH - 10);
-        int randY = TCOD_random_get_int(NULL, 1, SCREEN_HEIGHT - 25);
+        int randX = TCOD_random_get_int(NULL, 1, MAP_WIDTH - 10);
+        int randY = TCOD_random_get_int(NULL, 1, MAP_HEIGHT - 25);
         Item *gameItem = [[Item alloc] initItem:t withX:randX andY:randY withText:message andCode:access_code];
         
         switch([zone integerValue]) {

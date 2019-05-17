@@ -14,7 +14,7 @@
     self = [super init];
     panel_height = 7;
     bar_width = 15;
-    console = TCOD_console_new(SCREEN_WIDTH, panel_height);
+    console = TCOD_console_new(CAMERA_WIDTH, panel_height);
     msg_log = [[NSMutableArray alloc] init];
     return self;
 }
@@ -24,7 +24,7 @@
     TCOD_console_clear(console);
     [self renderBar];
     [self renderMessages];
-    TCOD_console_blit(console, 0, 0, SCREEN_WIDTH, panel_height, NULL, 0, SCREEN_HEIGHT-panel_height, 1.0f, 1.0f);
+    TCOD_console_blit(console, 0, 0, CAMERA_WIDTH, panel_height, NULL, 0, CAMERA_HEIGHT-panel_height, 1.0f, 1.0f);
 }
 
 -(void)renderBar {
@@ -40,7 +40,7 @@
     TCOD_console_clear(console);
     [self renderBar:lf];
     [self renderMessages];
-    TCOD_console_blit(console, 0, 0, SCREEN_WIDTH, panel_height, NULL, 0, SCREEN_HEIGHT-panel_height, 1.0f, 1.0f);
+    TCOD_console_blit(console, 0, 0, CAMERA_WIDTH, panel_height, NULL, 0, CAMERA_HEIGHT-panel_height, 1.0f, 1.0f);
 }
 
 -(void)renderBar:(LifeForm *)lf {
@@ -106,7 +106,7 @@
         TCOD_console_print(inv_console, 2, y, "(%c) %s %s", shortcut, [itemName UTF8String], [invItem.accessCode UTF8String]);
         y++; shortcut++;
     }
-    TCOD_console_blit(inv_console, 0, 0, inv_width, inv_height, NULL, SCREEN_WIDTH/2 - inv_width/2, SCREEN_HEIGHT/2 - inv_height/2, 1.0f, 1.0f);
+    TCOD_console_blit(inv_console, 0, 0, inv_width, inv_height, NULL, CAMERA_WIDTH/2 - inv_width/2, CAMERA_HEIGHT/2 - inv_height/2, 1.0f, 1.0f);
     TCOD_console_flush();
     
     // wait for key press
@@ -140,7 +140,7 @@
                 y++; loc += lineWidth;
             }
         }
-        TCOD_console_blit(terminal, 0, 0, term_width, term_height, NULL, SCREEN_WIDTH/2 - term_width/2, SCREEN_HEIGHT/2 - term_height/2, 1.0f, 1.0f);
+        TCOD_console_blit(terminal, 0, 0, term_width, term_height, NULL, CAMERA_WIDTH/2 - term_width/2, CAMERA_HEIGHT/2 - term_height/2, 1.0f, 1.0f);
         TCOD_console_flush();
     }
     TCOD_key_t key;
@@ -173,7 +173,7 @@
     TCOD_console_print(charsheet, 2, 10, "%s %d", "Charisma: ", [player charisma]);
     TCOD_console_print(charsheet, 2, 11, "%s %d", "Reading Skill: ", [player readingSkill]);
     
-    TCOD_console_blit(charsheet, 0, 0, cs_width, cs_height, NULL, SCREEN_WIDTH/2 - cs_width/2, SCREEN_HEIGHT/2 - cs_height/2, 1.0f, 1.0f);
+    TCOD_console_blit(charsheet, 0, 0, cs_width, cs_height, NULL, CAMERA_WIDTH/2 - cs_width/2, CAMERA_HEIGHT/2 - cs_height/2, 1.0f, 1.0f);
     TCOD_console_flush();
     TCOD_key_t key;
     TCOD_sys_wait_for_event(TCOD_KEY_PRESSED, &key, NULL, true);

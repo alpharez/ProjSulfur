@@ -158,8 +158,13 @@
 }
 
 -(void)render {
-    TCOD_console_put_char(NULL, _x, _y, _c, TCOD_BKGND_ALPH);
-    TCOD_console_set_char_foreground(NULL, _x, _y, _col);
+    //int xpos = MAP_WIDTH - _x + (CAMERA_WIDTH/2);
+    //int ypos = MAP_HEIGHT - _y + (CAMERA_HEIGHT/2);
+    int xpos = CAMERA_WIDTH/2;
+    int ypos = CAMERA_HEIGHT/2;
+    //NSLog(@"player real: (%d, %d) console: (%d, %d)", _x, _y, xpos, ypos);
+    TCOD_console_put_char(NULL, xpos, ypos, _c, TCOD_BKGND_ALPH);
+    TCOD_console_set_char_foreground(NULL, _x - MAP_WIDTH, _y - MAP_HEIGHT, _col);
 }
 
 -(void)update {

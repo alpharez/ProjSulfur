@@ -11,13 +11,15 @@
 #import "Item.h"
 #import "ItemManager.h"
 
-#define SCREEN_WIDTH 110
-#define SCREEN_HEIGHT 60
+#define MAP_WIDTH 610  // this can be much bigger
+#define MAP_HEIGHT 360  // and taller
+#define CAMERA_WIDTH 110  // we use camera width to display the map
+#define CAMERA_HEIGHT 60  // we use camera height
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Map : NSObject {
-    Boolean tiles[SCREEN_WIDTH][SCREEN_HEIGHT];
+    Boolean tiles[MAP_WIDTH][MAP_HEIGHT];
 }
 
 /*! @brief Zone1 TCOD map */
@@ -34,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) TCOD_color_t lightWall;
 @property(nonatomic, readonly) TCOD_color_t lightGround;
 @property(nonatomic, readonly) TCOD_noise_t noise;
+@property(nonatomic, readwrite) int cameraX;
+@property(nonatomic, readwrite) int cameraY;
 
 -(void)render:(int)px y:(int)py;
 -(Boolean)isExploredX:(int) x andY:(int) y;
@@ -42,6 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(Boolean)canWalkX:(int) x andY:(int) y;
 -(void)computeFOV:(int) x andY:(int) y;
 -(void)setWallPosX:(int) x andY:(int) y;
+-(void)createZoneRoom:(int)zone withRoom:(int)room playerStartAtX:(int)x andY:(int)y;
 -(void)digAtX1:(int) x1 andY1:(int) y1 andX2:(int) x2 andY2:(int) y2;
 -(void)createRoomAtX1:(int) x1 andY1:(int) y1 andX2:(int) x2 andY2:(int) y2;
 -(void)vline:(int) x y1:(int) y1 y2:(int) y2;
@@ -51,6 +56,9 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)hline_left:(int) x y:(int) y;
 -(void)hline_right:(int) x y:(int) y;
 -(void)createRooms:(int) num;
+-(void)moveCamera:(int) x andY:(int)y;
+-(int)toCameraCoordinatesX:(int) x playerx:(int) px;
+-(int)toCameraCoordinatesY:(int) y playery:(int) py;
 
 @end
 

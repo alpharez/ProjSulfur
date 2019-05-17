@@ -2,6 +2,9 @@
 
 ## Scrolling a big zone
 
+make every map connect... ok so 
+make doors
+
 ## make 5 zones down
 
 ## figures out how to get to the lower zones where stuff is harder
@@ -31,3 +34,7 @@
 ## Put creatures in rooms and make them respect walls
 
 ## same for items
+
+## smaller rooms, more rooms...
+
+## creepy ambient music

@@ -21,40 +21,34 @@
 -(id)init {
     self = [super init];
     TCOD_console_set_custom_font("cp437_10x10.png", TCOD_FONT_TYPE_GREYSCALE | TCOD_FONT_LAYOUT_ASCII_INROW, 16, 16);
-    player = [[LifeForm alloc] initWithXPos:40 andY:25 andColor:TCOD_yellow andChar:'@'];
-    computeFov = true;
+    int playerRandX = TCOD_random_get_int(NULL, 1, MAP_WIDTH - 10);
+    int playerRandY = TCOD_random_get_int(NULL, 1, MAP_HEIGHT - 25);
+    
+    player = [[LifeForm alloc] initWithXPos:playerRandX andY:playerRandY andColor:TCOD_yellow andChar:'@'];
+    computeFov = true;  // we want to compute intial field of view.
     // all life
     _lifeForms = [[NSMutableArray alloc] init];
-    [_lifeForms addObject:[[LifeForm alloc] initWithXPos:11 andY:32 andColor:TCOD_red andChar:'\02']];
-    [_lifeForms addObject:[[LifeForm alloc] initWithXPos:14 andY:30 andColor:TCOD_red andChar:'\02']];
+    //[_lifeForms addObject:[[LifeForm alloc] initWithXPos:11 andY:32 andColor:TCOD_red andChar:'\02']];
+    //[_lifeForms addObject:[[LifeForm alloc] initWithXPos:14 andY:30 andColor:TCOD_red andChar:'\02']];
     // Critters make some critters to kill, evolved mega-hamsters!
     //critter_list = [[NSMutableArray alloc] init];
-    int max_critters_per_level = 25;
+    int max_critters_per_level = 4;
     for(int i=0; i<max_critters_per_level; i++ ) {
-        int randX = TCOD_random_get_int(NULL, 1, SCREEN_WIDTH - 10);
-        int randY = TCOD_random_get_int(NULL, 1, SCREEN_HEIGHT - 25);
+        int randX = TCOD_random_get_int(NULL, 1, MAP_WIDTH - 10);
+        int randY = TCOD_random_get_int(NULL, 1, MAP_HEIGHT - 25);
         [_lifeForms addObject:[[Critter alloc] initWithXPos:randX andY:randY andColor:TCOD_azure andChar:'\176']];
     }
-    // non-organic items
-    _items = [[NSMutableArray alloc] init];
-    //[_items addObject:[[Item alloc] initItem:keycard withX:42 andY:27 withText:@""]];
-    //[_items addObject:[[Item alloc] initItem:health withX:44 andY:29 withText:@""]];
-    //[_items addObject:[[Item alloc] initItem:plant withX:46 andY:31 withText:@""]];
-    
-    ItemManager *im = [[ItemManager alloc] init];
-    //_items = [im getItemsForZone:1];
-    _items = [im zone1Items];
-    
-    zone1 = [[Map alloc] init];
-    hud = [[HUD alloc] init];
-    // player starts with a chemlight
-    [player.items addObject:[[Item alloc] initItem:chemLight withX:9 andY:9 withText:@"chem light" andCode:@""]];
+    _items = [[NSMutableArray alloc] init];  // non-organic items
+    ItemManager *im = [[ItemManager alloc] init];  // initialize item manager
+    _items = [im zone1Items];  // get zone1items from item manager
+    zone1 = [[Map alloc] init];  // init zone 1 map
+    [zone1 createZoneRoom:1 withRoom:1 playerStartAtX:playerRandX andY:playerRandY]; // create first room
+    hud = [[HUD alloc] init];  // init HUD
+    [player.items addObject:[[Item alloc] initItem:chemLight withX:9 andY:9 withText:@"chem light" andCode:@""]]; // player starts with a chemlight
     [hud message:@"It smells old and musty here.  You shake a chem light to get a better look." color:TCOD_lime];
     [hud message:@"There's some ambient light, but not much.  Your eyes strain to see." color:TCOD_lime];
-    
-    // compute initial fov
-    [zone1 computeFOV:player.x andY:player.y];
-    TCOD_sys_set_fps(30);
+    [zone1 computeFOV:player.x andY:player.y]; // compute initial fov
+    TCOD_sys_set_fps(30); // limit FPS to 30 or else it will go nuts
     gameStatus = STARTUP;
     return self;
 }
@@ -63,8 +57,9 @@
  */
 -(void)render {
     TCOD_console_clear(NULL);
+    
     [zone1 render:player.x y:player.y];
-    [player render];
+    
 
     for(LifeForm *lf in _lifeForms) {
         if( [zone1 isInFOVX:lf.x andY:lf.y]) {
@@ -76,7 +71,8 @@
             [i render];
         }
     }
-    [hud render:player];
+    [player render]; // render player last
+    [hud render:player];  // render HUD with player info
 }
 
 -(Boolean)checkTileAtX:(int)x andY:(int)y {
