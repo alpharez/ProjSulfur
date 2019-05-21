@@ -118,11 +118,11 @@
                 gameStatus = NEW_TURN;
                 break;
             } else if([[i name] isEqualToString:@"door"]) {
-                [hud showTerminal:[i text]];
+                //[hud showTerminal:[i text]];
                 gameStatus = NEW_TURN;
                 break;
             } else if([[i name] isEqualToString:@"drop ship"]) {
-                [hud showTerminal:[i text]];
+                //[hud showTerminal:[i text]];
                 gameStatus = NEW_TURN;
                 break;
             }

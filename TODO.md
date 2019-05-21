@@ -42,3 +42,10 @@ torch should have a life span so the player needs to find another one along the 
 player should *need* the health kits.
 weapons should do something
 
+## Acid color pallette 
+
+- black : 0,0,0
+- light green: 137, 255, 0
+- yellow: (253,255,0)
+- dark green: (7,88,0)
+- putrid green/grey:     (200,212,138)

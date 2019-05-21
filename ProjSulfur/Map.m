@@ -36,10 +36,10 @@
             TCOD_map_set_properties(_zone1,w,h,false,false); /* blck */
         }
     }
-    _darkWall.r = 35; _darkWall.g = 106; _darkWall.b = 25;
+    _darkWall.r = 7; _darkWall.g = 88; _darkWall.b = 0;
     _darkGround.r = 0; _darkGround.g = 0; _darkGround.b = 50;
-    _lightWall.r = 135; _lightWall.g = 206; _lightWall.b = 50;
-    _lightGround.r = 0; _lightGround.g = 0; _lightGround.b = 150;
+    _lightWall.r = 200; _lightWall.g = 212; _lightWall.b = 138;
+    _lightGround.r = 37; _lightGround.g = 55; _lightGround.b = 10;
     _minRoomSize = 4;
     _randomRoom = false;
     _roomWalls = true;
