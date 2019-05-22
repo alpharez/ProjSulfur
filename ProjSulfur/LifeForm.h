@@ -13,6 +13,9 @@
 #import "Attacker.h"
 #import "Destructible.h"
 
+#define LEVEL_BASE 100
+#define LEVEL_FACTOR 200
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LifeForm : NSObject <Attacker, Destructible>
@@ -23,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) int y;
 @property(nonatomic, readwrite) int health;
 @property(nonatomic, readonly) int xp;
+@property(nonatomic, readonly) int points;
 @property(nonatomic, readonly) int level;
 @property(nonatomic, readonly) float weight;
 @property(nonatomic, readwrite) TCOD_color_t col;
@@ -54,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(int)defenseRating;
 -(int)attackRating;
 -(int)readingSkill;
--(void)moveOrAttack:(id)lf;
+-(void)moveOrAttack:(id)lf map:(TCOD_map_t)map;
 
 @end
 

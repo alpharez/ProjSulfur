@@ -27,6 +27,7 @@
 @synthesize isDestroyed = _isDestroyed;
 @synthesize xp;
 @synthesize items = _items;
+@synthesize points = _points;
 
 - (NSString *)description
 {
@@ -41,6 +42,7 @@
 -(id)initWithXPos:(int)x andY:(int)y andColor:(TCOD_color_t) col {
     self = [super init];
     _weight = 65.0; // kgs
+    _points = 50;
     _level = 1;
     xp = 0;
     _x = x;
@@ -92,12 +94,14 @@
     _charisma = [self getHighest3Rolls];
 }
 
--(void)moveOrAttack:(id)lf {
+-(void)moveOrAttack:(id)lf map:(TCOD_map_t)map {
     LifeForm *target = (LifeForm *)lf;
     // if target is in attack range, then attack it.
     
     int dx = target.x - _x;
     int dy = target.y - _y;
+    int stepdx = (dx > 0 ? 1:-1);
+    int stepdy = (dy > 0 ? 1:-1);
     float distance=sqrtf(dx*dx+dy*dy);
     if(distance < 2) {
         int roll = [self rollD6];
@@ -120,8 +124,14 @@
         // if target is in sight range then move toward it.
         dx = (int)(round(dx/distance));
         dy = (int)(round(dy/distance));
-        _x += dx;
-        _y += dy;
+        if(TCOD_map_is_walkable(map, _x + dx, _y + dy)) {
+            _x += dx;
+            _y += dy;
+        } else if(TCOD_map_is_walkable(map, _x + dx, _y)) {
+            _x += stepdx;
+        } else if(TCOD_map_is_walkable(map, _x, _y + dy)) {
+            _y += stepdy;
+        }
     }
 }
 
@@ -226,10 +236,8 @@
         target.isDestroyed = true;
         target.c = '#';
         target.col = TCOD_red;
-        xp += 25;  // change this to be an attribute of target instead of hard code 25.
-        int level_base = 100;
-        int level_factor = 100;
-        int nextLevel = level_base + _level * level_factor;
+        xp += target.points;  // how much xp to give for this target.
+        int nextLevel = LEVEL_BASE + _level * LEVEL_FACTOR;
         if(xp >= nextLevel) {
             [self levelUp];
         }

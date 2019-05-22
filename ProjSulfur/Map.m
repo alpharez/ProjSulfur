@@ -31,8 +31,8 @@
     // init tiles array and map
     for(int w=0; w<MAP_WIDTH; w++) {
         for(int h=0; h<MAP_HEIGHT; h++) {
-            tiles[w][h] = false;
-            room[w][h] = false;
+            exploredTiles[w][h] = false;
+            roomTiles[w][h] = false;
             TCOD_map_set_properties(_zone1,w,h,false,false); /* blck */
         }
     }
@@ -54,15 +54,15 @@
     [self moveCamera:x andY:y];
     // make room for player
     [self createRoomAtX1:x-2 andY1:y-2 andX2:x+5 andY2:y+8];
-    [self createRoomAtX1:5 andY1:5 andX2:15 andY2:15];
-    [self createRoomAtX1:55 andY1:10 andX2:60 andY2:14];
+    //[self createRoomAtX1:5 andY1:5 andX2:15 andY2:15];
+    //[self createRoomAtX1:55 andY1:10 andX2:60 andY2:14];
     
-    [self setWallPosX:36 andY:22];
-    //[self vline:40 y1:10 y2:50];
+    //[self setWallPosX:36 andY:22];
+    [self vline:x+5 y1:y-1 y2:y+20];
     [self createRoomAtX1:30 andY1:49 andX2:50 andY2:65];
     //[self hline:17 y:25 x2:50];
     [self createRoomAtX1:3 andY1:20 andX2:18 andY2:36];
-    [self createRooms:166];
+    [self createRooms:266];
 }
 
 /*! @brief draw a vertical line */
@@ -123,7 +123,7 @@
 
 /*! @brief returns true if the player has been at this tile */
 -(Boolean)isExploredX:(int) x andY:(int) y {
-    return tiles[x][y];
+    return exploredTiles[x][y];
 }
 
 /*! @brief returns true if tile is in the TCOD FOV area */
@@ -132,7 +132,7 @@
         return false;
     }
     if( TCOD_map_is_in_fov(_zone1, x, y) ) {
-        tiles[x][y] = true;
+        exploredTiles[x][y] = true;
         return true;
     }
     return false;
@@ -152,7 +152,7 @@
 }
 
 -(Boolean)isRoomX:(int) x andY:(int) y {
-    return room[x][y];
+    return roomTiles[x][y];
 }
 
 -(void)computeFOV:(int) x andY:(int) y {
@@ -161,7 +161,7 @@
 }
 
 -(void)setWallPosX:(int) x andY:(int) y {
-    tiles[x][y] = false;  // can walk is false
+    exploredTiles[x][y] = false;  // can walk is false
     TCOD_map_set_properties(_zone1, x, y, true, false);
 }
 
@@ -201,8 +201,8 @@
     }
     for (int tilex=x1; tilex <= x2; tilex++) {
         for (int tiley=y1; tiley <= y2; tiley++) {
-            tiles[tilex][tiley] = false;  // explored?
-            room[tilex][tiley] = true; // this a room tile
+            exploredTiles[tilex][tiley] = false;  // explored?
+            roomTiles[tilex][tiley] = true; // this a room tile
             TCOD_map_set_properties(_zone1, tilex, tiley, true, true); // this makes a room
         }
     }
@@ -257,7 +257,7 @@
             TCOD_color_t light = ( wall ? _lightWall : _lightGround);
             float r=(mapX-px+dx)*(mapX-px+dx)+(mapY-py+dy)*(mapY-py+dy); /* cell distance to torch (squared) */
             if(!visible) {
-                if( tiles[mapX][mapY]) {
+                if( exploredTiles[mapX][mapY]) {
                     TCOD_console_set_char_background(NULL, conX, conY,
                                                          wall ? _darkWall: _darkGround, TCOD_BKGND_SET);
                 }

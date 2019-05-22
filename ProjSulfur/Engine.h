@@ -14,6 +14,8 @@
 #import "HUD.h"
 #import <SDL2/SDL.h>
 
+#define MAX_BADDIES 115
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Engine : NSObject
@@ -50,6 +52,7 @@ typedef enum {
 -(Boolean)checkTileAtX:(int)x andY:(int)y;
 -(NSString *)ancientTextTranslator:(NSString *)text readingSkill:(int)skill max:(int)maxSkill;
 -(void)playerMoved;
+-(int)rollD6;
 
 @end
 

@@ -11,6 +11,7 @@
 @implementation Item
 
 @synthesize name = _name;
+@synthesize type = _type;
 @synthesize text = _text;
 @synthesize accessCode = _accessCode;
 @synthesize weight = _weight;
@@ -26,24 +27,25 @@
 
 /*!
  @brief init item values
- @param item type of item
+ @param type type of item
  @param x location x value
  @param y location y value
  @param text description text
  @param accessCode access code to access item
  @return return item object
  */
--(id)initItem:(itemType)item withX:(int)x andY:(int)y withText:(NSString *)text andCode:(NSString *)accessCode {
+-(id)initItem:(itemType)type withX:(int)x andY:(int)y withText:(NSString *)text andCode:(NSString *)accessCode {
     self = [super init];
     _x = x;
     _y = y;
     _text = text;
     _accessCode = accessCode;
+    _type = type;
     
     // terminal.png is a 16x16
     // \03 is heart, \04 is diamond, \05 is club, \06 is spade
     // \25 looks like a snake/spiral  \27 is up and down arrow with base  \33 is left arrow  \36 triangle pointing up
-    switch(item) {
+    switch(_type) {
         case health:
             _c = '\03'; _col = TCOD_red; _weight = 2.0; _name = @"health kit"; break;
         case keycard:
@@ -68,6 +70,12 @@
             _c = '\35'; _col = TCOD_copper; _weight = 250.4; _name = @"light"; break;
         case chemLight:
             _c = '\35'; _col = TCOD_copper; _weight = 0.2; _name = @"chem light"; break;
+        case stungun:
+            _c = '\35'; _col = TCOD_copper; _weight = 2.0; _name = @"stun gun"; break;
+        case crowbar:
+            _c = '\35'; _col = TCOD_copper; _weight = 2.0; _name = @"crowbar"; break;
+        case fireax:
+            _c = '\35'; _col = TCOD_copper; _weight = 2.0; _name = @"fire ax"; break;
         case trap:
             _c = '_'; _col = TCOD_blue; _weight = 155.0; _name = @"trap"; break;  // raise alarm, spawn bots
         default:
@@ -77,20 +85,20 @@
 }
 
 /*!
- @brief show item object on screen
- */
-/*
--(void)render {
-    TCOD_console_put_char(NULL, _x, _y, _c, TCOD_BKGND_ALPH);
-    TCOD_console_set_char_foreground(NULL, _x, _y, _col);
-}*/
-
-/*!
  @brief show item object on camera
  */
 -(void)renderWithCameraX:(int)x andY:(int)y {
-    TCOD_console_put_char(NULL, _x - x, _y - y, _c, TCOD_BKGND_ALPH);
-    TCOD_console_set_char_foreground(NULL, _x - x, _y - y, _col);
+    if([_name isEqualToString:@"drop ship"]) {
+        TCOD_console_put_char(NULL, _x - x + 1, _y - y, '/', TCOD_BKGND_ALPH);
+        TCOD_console_put_char(NULL, _x - x + 2, _y - y, '/', TCOD_BKGND_ALPH);
+        TCOD_console_put_char(NULL, _x - x, _y - y, _c, TCOD_BKGND_ALPH);
+        TCOD_console_set_char_foreground(NULL, _x - x +1, _y - y, _col);
+        TCOD_console_set_char_foreground(NULL, _x - x +2, _y - y, _col);
+        TCOD_console_set_char_foreground(NULL, _x - x, _y - y, _col);
+    } else {
+        TCOD_console_put_char(NULL, _x - x, _y - y, _c, TCOD_BKGND_ALPH);
+        TCOD_console_set_char_foreground(NULL, _x - x, _y - y, _col);
+    }
 }
 
 /*!

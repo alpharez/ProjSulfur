@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)renderBar:(LifeForm *)lf;
 -(void)renderMessages;
 -(void)message:(NSString *) text color:(const TCOD_color_t) color;
--(void)chooseFromInventory:(NSMutableArray *)items;
+-(Item *)chooseFromInventory:(NSMutableArray *)items;
 -(void)showTerminal:(NSString *)text;
 -(void)characterSheet:(LifeForm *)player;
 

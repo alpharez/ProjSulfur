@@ -19,8 +19,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Map : NSObject {
-    Boolean tiles[MAP_WIDTH][MAP_HEIGHT]; // explored?
-    Boolean room[MAP_WIDTH][MAP_HEIGHT]; // is this in a room?
+    Boolean exploredTiles[MAP_WIDTH][MAP_HEIGHT]; // explored?
+    Boolean roomTiles[MAP_WIDTH][MAP_HEIGHT]; // is this in a room?
 }
 
 /*! @brief Zone1 TCOD map */

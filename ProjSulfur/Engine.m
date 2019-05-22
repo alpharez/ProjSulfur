@@ -38,14 +38,17 @@
     ItemManager *im = [[ItemManager alloc] init];  // initialize item manager
     _items = [im zone1Items];  // get zone1items from item manager
     // baddies
-    int max_critters_per_level = 115;
     int randX, randY;
-    for(int i=0; i<max_critters_per_level; i++ ) {
+    for(int i=0; i<MAX_BADDIES; i++ ) {
         do {
             randX = TCOD_random_get_int(NULL, 1, MAP_WIDTH - 10);
             randY = TCOD_random_get_int(NULL, 1, MAP_HEIGHT - 25);
         } while(![zone1 isRoomX:randX andY:randY]); // then loop until in a room
-        [_lifeForms addObject:[[Critter alloc] initWithXPos:randX andY:randY andColor:TCOD_azure andChar:'\176']];
+        if([self rollD6] == 6) { // bad guy
+            [_lifeForms addObject:[[LifeForm alloc] initWithXPos:randX andY:randY andColor:TCOD_red andChar:'\02']];
+        } else { // regular critter
+            [_lifeForms addObject:[[Critter alloc] initWithXPos:randX andY:randY andColor:TCOD_azure andChar:'\176']];
+        }
     }
     // place items
     for(Item *item in _items) {
@@ -110,6 +113,11 @@
     for(Item *i in _items) {
         if((i.x == x) && (i.y == y)) {
             if([[i name] isEqualToString:@"terminal"]) {
+                if(player.readingSkill < 50) {
+                    [hud message:@"You can't quote make this out... need practice reading ancient text" color:TCOD_white];
+                } else if(player.readingSkill < 75) {
+                    [hud message:@"You are getting better at reading ancient texts, still hard to grasp." color:TCOD_white];
+                }
                 [hud showTerminal:[self ancientTextTranslator:[i text] readingSkill:player.readingSkill max:100]];
                 gameStatus = NEW_TURN;
                 break;
@@ -308,7 +316,36 @@
                 break;
             }
             if(key.c == 'i') { // inventory
-                [hud chooseFromInventory:player.items];
+                Item *itemSelected = [hud chooseFromInventory:player.items];
+                if(itemSelected == NULL) break;
+                switch(itemSelected.type) {
+                    case health:
+                        [hud message:@"You use the health potion" color:TCOD_white];
+                        player.health += 25;
+                        [player.items removeObject:itemSelected];
+                        break;
+                    case plant:
+                        [hud message:@"You eat the plant and gain health." color:TCOD_white];
+                        player.health += 10;
+                        [player.items removeObject:itemSelected];
+                        break;
+                    case keycard:
+                    case terminal:
+                    case wrench:
+                    case fireax:
+                    case crowbar:
+                    case stungun:
+                    case tree:
+                    case pod:
+                    case dropShip:
+                    case light:
+                    case door:
+                    case stairs:
+                    case chemLight:
+                    case trap:
+                    default:
+                        break;
+                }
                 break;
             }
             if(key.c == 't') { // terminal
@@ -329,7 +366,7 @@
         for (LifeForm *lf in _lifeForms) {
             if(!lf.isDestroyed) {
                 [lf update];
-                [lf moveOrAttack:player];
+                [lf moveOrAttack:player map:zone1.zone1];
             }
         }
     }
@@ -349,6 +386,7 @@
  @return ciphertext or ancienttext
  */
 -(NSString *)ancientTextTranslator:(NSString *)text readingSkill:(int)skill max:(int)maxSkill {
+    if(text == Nil) return @"text was NIL";
     if(skill >= maxSkill) {
         return text;
     } else {
@@ -369,6 +407,10 @@
         }
         return [NSString stringWithUTF8String:UTF8Str];
     }
+}
+
+-(int)rollD6 {
+    return (arc4random() % (6)) + 1;
 }
 
 @end

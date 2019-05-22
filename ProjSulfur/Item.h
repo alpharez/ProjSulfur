@@ -74,6 +74,7 @@ typedef enum {
 } itemType;
 
 @property(nonatomic, readwrite) NSString *name;
+@property(nonatomic, readwrite) itemType type;
 @property(nonatomic, readwrite) NSString *text;
 @property(nonatomic, readwrite) NSString *accessCode;
 @property(nonatomic, readwrite) float weight;
@@ -82,8 +83,7 @@ typedef enum {
 @property(nonatomic, readwrite) int x;
 @property(nonatomic, readwrite) int y;
 
--(id)initItem:(itemType)item withX:(int)x andY:(int)y withText:(NSString *)text andCode:(NSString *)accessCode;
-//-(void)render;
+-(id)initItem:(itemType)type withX:(int)x andY:(int)y withText:(NSString *)text andCode:(NSString *)accessCode;
 -(void)renderWithCameraX:(int)x andY:(int) y;
 -(void)setlocation:(int)x andY:(int)y;
 @end

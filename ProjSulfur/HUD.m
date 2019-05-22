@@ -49,9 +49,7 @@
     char xpTxt[32];
     sprintf(xpTxt,"XP lvl:%d HP:%d", lf.level, lf.health);
     char stats1[64], stats2[64], stats3[64], stats4[64];
-    int level_base = 100;
-    int level_factor = 100;
-    int nextLevel = level_base + lf.level * level_factor;
+    int nextLevel = LEVEL_BASE + lf.level * LEVEL_FACTOR;
     sprintf(stats1,"St:%d Dex:%d Con:%d",lf.strength, lf.dexterity, lf.constitution);
     sprintf(stats2,"Int:%d Wis:%d Ch:%d",lf.intelligence, lf.wisdom, lf.charisma);
     sprintf(stats3,"att:%d def:%d read:%d",[lf attackRating], [lf defenseRating], [lf readingSkill]);
@@ -91,7 +89,7 @@
  @discussion list of inventory items and keys to use them.
  @param items list of inventory items
  */
--(void)chooseFromInventory:(NSMutableArray *)items {
+-(Item *)chooseFromInventory:(NSMutableArray *)items {
     int inv_width = 50;
     int inv_height = 28;
     TCOD_console_t inv_console = TCOD_console_new(inv_width, inv_height);
@@ -112,6 +110,13 @@
     // wait for key press
     TCOD_key_t key;
     TCOD_sys_wait_for_event(TCOD_KEY_PRESSED, &key, NULL, true);
+    if ( key.vk == TCODK_CHAR ) {
+        int itemIndex=key.c - 'a';
+        if(itemIndex >= 0 && itemIndex < [items count]) {
+            return [items objectAtIndex:itemIndex];
+        }
+    }
+    return NULL;
 }
 
 /*!
@@ -133,7 +138,7 @@
         if([text length] <= lineWidth) {
             TCOD_console_print(terminal, 2, y, "%s", [text UTF8String]);
         } else {
-            for (int i=0; i<[text length]/lineWidth; i++ ) {
+            for (int i=0; i<[text length]/lineWidth-1; i++ ) {
                 NSRange range = NSMakeRange(loc, lineWidth);
                 NSString *substr = [text substringWithRange:range];
                 TCOD_console_print(terminal, 2, y, "%s", [substr UTF8String]);

@@ -109,7 +109,7 @@
     // add a bunch more items
     for(int n=0; n< 166; n++) {
         itemName = @"random item";
-        randItem = TCOD_random_get_int(NULL, 0, 15);  // items 0 - 15
+        randItem = TCOD_random_get_int(NULL, health, trap);  // items 0 - 15
         if(randItem == terminal) {
             randString = TCOD_random_get_int(NULL, 0, (int)[allTermStrings count]-1);
             itemName = [allTermStrings objectAtIndex:randString];

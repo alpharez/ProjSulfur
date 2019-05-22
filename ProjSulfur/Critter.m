@@ -19,6 +19,7 @@
 @synthesize x = _x;
 @synthesize y = _y;
 @synthesize isDestroyed = _isDestroyed;
+@synthesize points = _points;
 
 -(NSString *)description {
     return [super description];
@@ -37,6 +38,7 @@
     _x = x;
     _y = y;
     _col = col;
+    _points = 25;
     _name = @"mega hamster";
     return self;
 }
@@ -78,12 +80,14 @@
     // would be in bad trouble.
 }
 
--(void)moveOrAttack:(id)lf {
+-(void)moveOrAttack:(id)lf map:(TCOD_map_t)map {
     LifeForm *target = (LifeForm *)lf;
     // if target is in attack range, then attack it.
     
     int dx = target.x - _x;
     int dy = target.y - _y;
+    int stepdx = (dx > 0 ? 1:-1);
+    int stepdy = (dy > 0 ? 1:-1);
     float distance=sqrtf(dx*dx+dy*dy);
     if(distance < 2) {
         int roll = [self rollD6];
@@ -104,8 +108,14 @@
         // if target is in sight range then move toward it.
         dx = (int)(round(dx/distance));
         dy = (int)(round(dy/distance));
-        _x += dx;
-        _y += dy;
+        if(TCOD_map_is_walkable(map, _x + dx, _y + dy)) {
+            _x += dx;
+            _y += dy;
+        } else if(TCOD_map_is_walkable(map, _x + dx, _y)) {
+            _x += stepdx;
+        } else if(TCOD_map_is_walkable(map, _x, _y + dy)) {
+            _y += stepdy;
+        }
     }
 }
 
