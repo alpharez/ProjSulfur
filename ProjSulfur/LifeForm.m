@@ -13,6 +13,7 @@
 @synthesize c = _c;
 @synthesize col = _col;
 @synthesize health = _health; // average const = 6*3/2 = 9 (100)
+@synthesize maxHealth = _maxHealth;
 @synthesize name = _name;
 @synthesize weight = _weight;
 @synthesize level = _level;
@@ -27,7 +28,9 @@
 @synthesize isDestroyed = _isDestroyed;
 @synthesize xp;
 @synthesize items = _items;
-@synthesize points = _points;
+@synthesize points = _points; // experience points earned when killed
+@synthesize attackBonus = _attackBonus;
+@synthesize attackBonusUses = _attackBonusUses;
 
 - (NSString *)description
 {
@@ -52,6 +55,7 @@
     _name = n.name;
     [self rollAbilities];
     _health = _constitution * 100.0 / 9; // health is related to constitution
+    _maxHealth = _health;
     _items = [[NSMutableArray alloc] init];
     return self;
 }
@@ -97,7 +101,7 @@
 -(void)moveOrAttack:(id)lf map:(TCOD_map_t)map {
     LifeForm *target = (LifeForm *)lf;
     // if target is in attack range, then attack it.
-    
+    if(_attackBonusUses <= 0) _attackBonus = 0;  // check for attack bonus (weapons)
     int dx = target.x - _x;
     int dy = target.y - _y;
     int stepdx = (dx > 0 ? 1:-1);
@@ -109,9 +113,11 @@
             //NSLog(@"Miss");
         } else if (roll == 6) { // crit
             //NSLog(@"Crit");
-            target.health -= _strength + 4; // attack is lessened by dex.
+            target.health -= _strength*2 + _attackBonus; // attack is lessened by dex.
+            _attackBonusUses--;
         } else if (target.dexterity > _strength) {
-            if(roll > 4) target.health -= _strength;  // dex is high so miss more often
+            if(roll > 4) target.health -= _strength + _attackBonus;  // dex is high so miss more often
+            _attackBonusUses--;
         } else {
             target.health -= _strength; // attack is lessened by dex.
         }
@@ -199,6 +205,7 @@
     _wisdom += [self rollD6];
     _charisma += [self rollD6];
     _health = _constitution * 100.0 / 9;
+    _maxHealth = _health;
     
 }
 
@@ -243,5 +250,10 @@
         }
     }
 }
+
+- (void)moveOrAttack:(nonnull id)lf {
+    
+}
+
 
 @end

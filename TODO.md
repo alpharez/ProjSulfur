@@ -1,5 +1,8 @@
 #  TODO
  
+## make pods and drop ships look cooler
+## make max health the limit
+
 ## make doors
 
 ## make 5 zones down

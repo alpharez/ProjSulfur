@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)renderWithCameraX:(int)x andY:(int)y;
 -(void)update;
 -(void)attack;
--(void)moveOrAttack:(id)lf map:(TCOD_map_t)map;
 
 @end
 

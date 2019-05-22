@@ -15,6 +15,8 @@
 #import <SDL2/SDL.h>
 
 #define MAX_BADDIES 115
+#define HEALTH_KIT 25
+#define PLANT_NUTRITION 10
 
 NS_ASSUME_NONNULL_BEGIN
 

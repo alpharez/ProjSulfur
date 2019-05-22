@@ -321,19 +321,44 @@
                 switch(itemSelected.type) {
                     case health:
                         [hud message:@"You use the health potion" color:TCOD_white];
-                        player.health += 25;
+                        if((player.health + HEALTH_KIT) > player.maxHealth) {
+                            player.health = player.maxHealth;
+                        } else {
+                            player.health += HEALTH_KIT;
+                        }
                         [player.items removeObject:itemSelected];
                         break;
                     case plant:
                         [hud message:@"You eat the plant and gain health." color:TCOD_white];
-                        player.health += 10;
+                        if((player.health + PLANT_NUTRITION) > player.maxHealth) {
+                            player.health = player.maxHealth;
+                        } else {
+                            player.health += PLANT_NUTRITION;
+                        }
                         [player.items removeObject:itemSelected];
                         break;
                     case keycard:
+                        break;
                     case terminal:
+                        break;
                     case wrench:
+                        [hud message:@"You wield the wrench as a weapon." color:TCOD_white];
+                        [player.items removeObject:itemSelected];
+                        player.attackBonus = 5;
+                        player.attackBonusUses = 10;
+                        break;
                     case fireax:
+                        [hud message:@"You wield the fireax as a weapon." color:TCOD_white];
+                        [player.items removeObject:itemSelected];
+                        player.attackBonus = 7;
+                        player.attackBonusUses = 8;
+                        break;
                     case crowbar:
+                        [hud message:@"You wield the crowbar as a weapon." color:TCOD_white];
+                        [player.items removeObject:itemSelected];
+                        player.attackBonus = 6;
+                        player.attackBonusUses = 12;
+                        break;
                     case stungun:
                     case tree:
                     case pod:

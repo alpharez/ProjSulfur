@@ -12,9 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol Attacker <NSObject>
 
+@property(nonatomic, readwrite) int attackBonus;
+@property(nonatomic, readwrite) int attackBonusUses;
+
 -(void)attack;  // humans attack with hands or whatever improvised weapon... critters attack with claws or teeth.
 -(void)attack:(id)lf;
 -(void)moveOrAttack:(id)lf;
+-(void)moveOrAttack:(id)lf map:(TCOD_map_t)map;
 
 @end
 
